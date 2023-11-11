@@ -30,3 +30,10 @@ class TestShellingMedium4Colors {
         Schelling test = new Schelling(800, 20, 5, (char)6, colors);
     }
 }
+class TestShellingBig4Colors {
+
+    public static void main(String[] args) {
+        final Color[] colors = {Color.white, Color.blue, Color.red, Color.green, Color.magenta, Color.orange, Color.pink};
+        Schelling test = new Schelling(800, 100, 2, (char)6, colors);
+    }
+}
