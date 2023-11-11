@@ -1,4 +1,11 @@
 import java.awt.*;
+import java.util.Random;
+
+class DVectorTest {
+    public static void main(String[] args) {
+        System.out.print(DVector.rotate(new DVector(10, 10), 90));
+    }
+}
 
 public class DVector {
     private double x;
@@ -27,13 +34,13 @@ public class DVector {
         return new DVector(newX, newY);
     }
 
-    public static DVector rotate(DVector point, DVector vector, double angleDegrees) {
+    public static DVector rotate(DVector vector, double angleDegrees) {
         double angleRadians = Math.toRadians(angleDegrees);
-        double cosTheta = Math.cos(angleRadians);
-        double sinTheta = Math.sin(angleRadians);
+        double cos = Math.cos(angleRadians);
+        double sin = Math.sin(angleRadians);
 
-        double newX = cosTheta * (point.x - vector.x) - sinTheta * (point.y - vector.y) + vector.x;
-        double newY = sinTheta * (point.x - vector.x) + cosTheta * (point.y - vector.y) + vector.y;
+        double newX = vector.getX() * Math.cos(angleRadians) - vector.getY() * Math.sin(angleRadians);
+        double newY = vector.getX() * Math.sin(angleRadians) + vector.getY() * Math.cos(angleRadians);
 
         return new DVector(newX, newY);
     }
@@ -48,6 +55,23 @@ public class DVector {
         return (u.x * v.x) + (u.y * v.y);
     }
 
+    public static Point toPoint(DVector vector) {
+        return new Point((int) Math.round(vector.getX()), (int) Math.round(vector.getY()));
+    }
+
+    public static Point getCoordinates(DVector vector, int cellSize) {
+        return new Point((int) Math.floor(vector.getX() / cellSize), (int) Math.floor(vector.getY() / cellSize));
+    }
+
+    public void add(DVector other) {
+        this.x += other.getX();
+        this.y += other.getY();
+    }
+
+    public void add(int scalar) {
+        this.x += scalar;
+        this.y += scalar;
+    }
     public void set(double x, double y) {
         this.x = x;
         this.y = y;
@@ -82,14 +106,27 @@ public class DVector {
         this.mult(1 / this.magnitude());
     }
 
-    public DVector Normalize() {
+    public DVector normalize() {
         DVector normalized = new DVector(this.x, this.y);
         normalized.mult(1 / this.magnitude());
         return normalized;
     }
 
-    public static Point toPoint(DVector vector) {
-        return new Point((int)Math.round(vector.getX()), (int)Math.round(vector.getY()));
+    public void randomize(int max) {
+        Random r = new Random();
+
+        x = max * r.nextDouble();
+        y = max * r.nextDouble();
+    }
+
+    public void nullify() {
+        this.x = 0;
+        this.y = 0;
+    }
+
+    @Override
+    public String toString() {
+        return "x: " + x + " y: " + y + "\n";
     }
 }
 

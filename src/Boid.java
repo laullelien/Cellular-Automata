@@ -1,11 +1,10 @@
 import java.util.Random;
 
 public class Boid {
+    final static private double visibilityThreshold = 0.8;
     private DVector position;
     private DVector acceleration;
     private DVector velocity;
-    
-    final static private double visibilityThreshold = 0.8;
 
     public Boid(DVector position, DVector acceleration, DVector velocity) {
         this.position = position;
@@ -13,31 +12,41 @@ public class Boid {
         this.velocity = velocity;
     }
 
-    public Boid(int windowSize) {
+    public Boid(int windowSize, int boidSize) {
         Random r = new Random();
 
-        this.position = new DVector(r.nextInt(windowSize), r.nextInt(windowSize));
-        this.velocity = new DVector(windowSize * r.nextDouble(), windowSize * r.nextDouble());
-        this.acceleration = new DVector(windowSize * r.nextDouble(), windowSize * r.nextDouble());
+        this.position = new DVector(windowSize * r.nextDouble(), windowSize * r.nextDouble());
+        this.velocity = new DVector(boidSize * r.nextDouble(), boidSize * r.nextDouble());
+        velocity.add(-boidSize / 2);
+        this.acceleration = new DVector(0, 0);
     }
-    
-    public boolean isVisible(Boid b){
+
+    public boolean isVisible(Boid b) {
         DVector vectorBoids = DVector.minus(b.position, this.position);
 
         DVector orientation = this.getOrientation();
         vectorBoids.selfNormalize();
 
         double dotProduct = DVector.dotProduct(orientation, vectorBoids);
-        
+
         return dotProduct >= -visibilityThreshold;
     }
 
     public DVector getOrientation() {
-        return velocity.Normalize();
+        return velocity.normalize();
     }
 
     public DVector getPosition() {
         return this.position;
+    }
+
+    public void randomize(int windowSize, int boidSize) {
+        Random r = new Random();
+
+        position.randomize(windowSize);
+        velocity.randomize(boidSize);
+        velocity.add(-boidSize / 2);
+        acceleration.nullify();
     }
 
 }
