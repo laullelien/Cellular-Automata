@@ -4,15 +4,7 @@ import gui.Simulable;
 
 import java.awt.*;
 
-
-class TestGirdSimulator {
-
-    public static void main(String[] args) {
-        GridSimulable gridSimulator = new GridSimulable(900, 25);
-    }
-}
-
-public class GridSimulable implements Simulable {
+public abstract class GridSimulable implements Simulable {
     final private GUISimulator gui;
     final private int windowSize;
     final private int GridWidth;
@@ -27,20 +19,10 @@ public class GridSimulable implements Simulable {
     }
 
     @Override
-    public void next() {
-        System.out.println("Not implemented yet!");
-    }
+    public abstract void next();
 
     @Override
-    public void restart() {
-        int cellSize = windowSize / GridWidth;
-        int halfCellSize = (cellSize + 1) / 2;
-        for (int i = 0; i < windowSize / cellSize; i++) {
-            for (int j = 0; j < windowSize / cellSize; j++) {
-                this.gui.addGraphicalElement(new Rectangle(halfCellSize + i * cellSize, halfCellSize + j * cellSize, Color.black, Color.white, cellSize));
-            }
-        }
-    }
+    public abstract void restart();
 
     public void colorCell(Color color, int x, int y) {
         int cellSize = windowSize / GridWidth;
