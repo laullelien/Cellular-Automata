@@ -25,7 +25,7 @@ public class Boid {
         DVector vectorBoids = DVector.minus(b.position, this.position);
 
         DVector orientation = this.getOrientation();
-        vectorBoids.normalize();
+        vectorBoids.selfNormalize();
 
         double dotProduct = DVector.dotProduct(orientation, vectorBoids);
         
@@ -33,7 +33,11 @@ public class Boid {
     }
 
     public DVector getOrientation() {
-        return velocity.normalize();
+        return velocity.Normalize();
+    }
+
+    public DVector getPosition() {
+        return this.position;
     }
 
 }

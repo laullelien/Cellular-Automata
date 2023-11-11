@@ -1,5 +1,4 @@
 import gui.GUISimulator;
-import gui.Rectangle;
 import gui.Simulable;
 
 import java.awt.*;
@@ -7,22 +6,20 @@ import java.util.ArrayList;
 
 public class BoidsSimulable implements Simulable {
     final private GUISimulator gui;
-    final private int boidSize = 20;
+    final private static int boidSize = 20;
     ArrayList<Boid>[][] boidGrid;
-    private int windowSize;
-    private Color boidColor;
-    private int neighbourInfluenceCircleRadius;
-    private int neighbourInfluenceCircleDiametre;
-    private int gridSize;
+    private final Color boidColor;
+    private final int neighbourInfluenceCircleRadius;
+    private final int neighbourInfluenceCircleDiametre;
+    private final int gridSize;
 
     BoidsSimulable(int windowSize, Color boidColor, Color backgroundColor, int neighbourInfluenceCircleRadius, int boidNumber) {
-        this.windowSize = windowSize;
         this.boidColor = boidColor;
         this.neighbourInfluenceCircleRadius = neighbourInfluenceCircleRadius;
         this.neighbourInfluenceCircleDiametre = 2 * neighbourInfluenceCircleRadius;
         gridSize = windowSize / neighbourInfluenceCircleDiametre;
         boidGrid = new ArrayList[gridSize][gridSize];
-        this.gui = new GUISimulator(this.windowSize, this.windowSize, backgroundColor, this);
+        this.gui = new GUISimulator(windowSize, windowSize, backgroundColor, this);
     }
 
     public int getNeighbourInfluenceCircleRadius() {
@@ -34,11 +31,12 @@ public class BoidsSimulable implements Simulable {
     }
 
     private void drawBoid(Boid boid) {
+        DVector position = boid.getPosition();
         DVector orientation = boid.getOrientation();
-        DVector topPoint = orientation.mult(boidSize / 2);
-        DVector leftPoint = topPoint.rotate(boid.orientation, 90);
-        DVector rightPoint = topPoint.rotate(boid.orientation, -90);
-        gui.addGraphicalElement(new Triangle(topPoint.toPoint(), rightPoint.toPoint(), leftPoint.toPoint(), boidColor));
+        DVector topPoint = DVector.mult(position, boidSize / 2);
+        DVector leftPoint = DVector.rotate(position, boid.getOrientation(), 90);
+        DVector rightPoint = DVector.rotate(position, boid.getOrientation(), -90);
+        gui.addGraphicalElement(new Triangle(DVector.toPoint(topPoint), DVector.toPoint(rightPoint), DVector.toPoint(leftPoint), boidColor));
     }
 
     private void draw() {
