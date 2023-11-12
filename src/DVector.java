@@ -3,7 +3,7 @@ import java.util.Random;
 
 class DVectorTest {
     public static void main(String[] args) {
-        System.out.print(DVector.rotate(new DVector(10, 10), 90));
+        System.out.print(DVector.rotate(new DVector(10, 10), 45));
     }
 }
 
@@ -72,6 +72,7 @@ public class DVector {
         this.x += scalar;
         this.y += scalar;
     }
+
     public void set(double x, double y) {
         this.x = x;
         this.y = y;
@@ -119,14 +120,19 @@ public class DVector {
         y = max * r.nextDouble();
     }
 
-    public void nullify() {
-        this.x = 0;
-        this.y = 0;
+    public double distanceTo(DVector other) {
+        double deltaX = this.x - other.x;
+        double deltaY = this.y - other.y;
+        return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    }
+
+    public DVector copy() {
+        return new DVector(x, y);
     }
 
     @Override
     public String toString() {
-        return "x: " + x + " y: " + y + "\n";
+        return "x: " + x + " y: " + y;
     }
 }
 
