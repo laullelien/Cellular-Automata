@@ -1,7 +1,8 @@
 import java.util.Random;
+import java.awt.*;
 
 public class Boid {
-    final static private double visibilityThreshold = 0.8;
+    final static private double VISIBILITY_THRESHOLD = 0.8;
     private DVector position;
     private DVector acceleration;
     private DVector velocity;
@@ -29,7 +30,7 @@ public class Boid {
 
         double dotProduct = DVector.dotProduct(orientation, vectorBoids);
 
-        return dotProduct >= -visibilityThreshold;
+        return dotProduct >= -VISIBILITY_THRESHOLD;
     }
 
     public DVector getOrientation() {
