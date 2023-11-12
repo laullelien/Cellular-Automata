@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.Random;
 
 class TestBoid {
@@ -24,6 +25,21 @@ public class Boid {
     final static private double visibilityThreshold = 0.9;
     private DVector position;
     private DVector velocity;
+
+    private Color boidColor;
+
+    private int boidMass;
+    private int boidSize;
+
+    private int velocityMax;
+
+    private double cohesionConstant;
+    private double alignmentConstant;
+    private double separationConstant;
+    private double wallRepulsionConstant;
+    private double frictionConstant;
+    private int neighbourInfluenceCircleRadius;
+    private int neighbourInfluenceCircleDiametre;
 
     public Boid(DVector position, DVector velocity) {
         this.position = position;
