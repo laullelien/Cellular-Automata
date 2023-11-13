@@ -114,7 +114,7 @@ public class SchellingSimulator extends GridSimulable {
         homelessFamilies.clear();
     }
 
-    @Override
+    /*@Override
     public void restart() {
         clearAvailableHomes();
         clearHomelessFamilies();
@@ -127,7 +127,7 @@ public class SchellingSimulator extends GridSimulable {
     public void next() {
         moveHomelessFamiliesToAvailableHomes();
         removeUnhappyFamilies();
-    }
+    }*/
 
     @Override
     public Event getStartingEvent() {

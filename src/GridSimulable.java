@@ -20,12 +20,12 @@ public abstract class GridSimulable implements Simulable {
     }
 
     @Override
-    public void next() {
+    public final void next() {
         manager.next();
     }
 
     @Override
-    public void restart() {
+    public final void restart() {
         manager.restart();
         manager.addEvent(getStartingEvent());
         next();

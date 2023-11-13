@@ -6,31 +6,48 @@ public class GameOfLifeSimulator extends GridSimulable {
     private final int[] numberNeighborsToBorn;
     private final Color[] colors;
     private int[][] currentGrid;
+
+    public int[] getNumberNeighborsToLive() {
+        return numberNeighborsToLive;
+    }
+
+    public int[] getNumberNeighborsToBorn() {
+        return numberNeighborsToBorn;
+    }
+
+    public int[][] getCurrentGrid() {
+        return currentGrid;
+    }
+
+    public int[][] getNextGrid() {
+        return nextGrid;
+    }
+
     private int[][] nextGrid;
-    
-    public GameOfLifeSimulator(int windowSize, int gridWidth, int[] numberNeighborsToLive, int[] numberNeighborsToBorn, Color deadCellColor, Color aliveCellColor){
+
+    public GameOfLifeSimulator(int windowSize, int gridWidth, int[] numberNeighborsToLive, int[] numberNeighborsToBorn, Color deadCellColor, Color aliveCellColor) {
         super(windowSize, gridWidth);
         this.numberNeighborsToLive = numberNeighborsToLive;
         this.numberNeighborsToBorn = numberNeighborsToBorn;
 
-        colors = new Color[] {deadCellColor, aliveCellColor};
+        colors = new Color[]{deadCellColor, aliveCellColor};
         currentGrid = new int[gridWidth][gridWidth];
         nextGrid = new int[gridWidth][gridWidth];
         initialiseGridRandomly();
         drawGrid();
     }
 
-    private void initialiseGridRandomly(){
+    public void initialiseGridRandomly() {
         int gridWidth = super.getGridWidth();
         Random generator = new Random();
-        for (int i = 0; i < gridWidth; i++){
-            for (int j = 0; j < gridWidth; j++){
+        for (int i = 0; i < gridWidth; i++) {
+            for (int j = 0; j < gridWidth; j++) {
                 currentGrid[i][j] = generator.nextInt(2);
             }
         }
     }
 
-    private void drawGrid() {
+    public void drawGrid() {
         int gridWidth = super.getGridWidth();
         for (int i = 0; i < gridWidth; i++) {
             for (int j = 0; j < gridWidth; j++) {
@@ -39,16 +56,16 @@ public class GameOfLifeSimulator extends GridSimulable {
         }
     }
 
-    private int[] neigbhorCalculation(int i, int j){
+    public int[] neigbhorCalculation(int i, int j) {
         int gridWidth = super.getGridWidth();
         int[] neighbors = new int[8];
-        
+
         // neighbors indices
         int i_top = (i - 1 + gridWidth) % gridWidth;
         int i_bellow = (i + 1) % gridWidth;
         int j_left = (j - 1 + gridWidth) % gridWidth;
         int j_right = (j + 1) % gridWidth;
-    
+
         neighbors[0] = currentGrid[i_top][j_left];
         neighbors[1] = currentGrid[i_top][j];
         neighbors[2] = currentGrid[i_top][j_right];
@@ -63,53 +80,51 @@ public class GameOfLifeSimulator extends GridSimulable {
 
     public int countCells(int[] neighbors, int cellState) {
         int countCell = 0;
-    
+
         for (int i = 0; i < neighbors.length; i++) {
             if (neighbors[i] == cellState) {
-                countCell ++;
-            } 
+                countCell++;
+            }
         }
-        
+
         return countCell;
     }
 
-    private boolean isInTheTable(int[] array, int val){
+    public boolean isInTheTable(int[] array, int val) {
         for (int element : array) {
-            if (element == val){
+            if (element == val) {
                 return true;
             }
         }
         return false;
     }
-    
 
-    private void changeGridState(){
+
+    public void changeGridState() {
         int[][] temp = currentGrid;
         currentGrid = nextGrid;
         nextGrid = temp;
     }
-    
-    @Override
+
+  /*  @Override
     public void next() {
         int gridWidth = super.getGridWidth();
-        for (int i = 0; i < gridWidth; i ++){
-            for (int j = 0; j < gridWidth; j ++){
+        for (int i = 0; i < gridWidth; i++) {
+            for (int j = 0; j < gridWidth; j++) {
                 int[] neighbors = neigbhorCalculation(i, j);
-                if (currentGrid[i][j] == 0){    // Dead cell
+                if (currentGrid[i][j] == 0) {    // Dead cell
                     int numberAliveCell = countCells(neighbors, 1);
-                    if (isInTheTable(this.numberNeighborsToBorn, numberAliveCell)){
+                    if (isInTheTable(this.numberNeighborsToBorn, numberAliveCell)) {
                         nextGrid[i][j] = 1;
-                    }
-                    else{
+                    } else {
                         nextGrid[i][j] = 0;
                     }
                 }
-                if (currentGrid[i][j] == 1){    // Alive cell
+                if (currentGrid[i][j] == 1) {    // Alive cell
                     int numberAliveCell = countCells(neighbors, 1);
-                    if (isInTheTable(this.numberNeighborsToLive, numberAliveCell)){
+                    if (isInTheTable(this.numberNeighborsToLive, numberAliveCell)) {
                         nextGrid[i][j] = 1;
-                    }
-                    else{
+                    } else {
                         nextGrid[i][j] = 0;
                     }
                 }
@@ -123,11 +138,11 @@ public class GameOfLifeSimulator extends GridSimulable {
     public void restart() {
         initialiseGridRandomly();
         drawGrid();
-    }
+    }*/
 
     @Override
     public Event getStartingEvent() {
-        return new MessageEvent(0, "Not implemented yet!");
+        return new GameOfLifeEvent(0, this, super.getManager());
     }
 }
 
