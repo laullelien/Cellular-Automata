@@ -76,29 +76,6 @@ public class BoidsSimulator implements Simulable {
         boids.setBoidGrid(boids.getNewBoidGrid());
         boids.setNewBoidGrid(temp);
     }
-/*
-    @Override
-    public void next() {
-        reInitializeNewGrid();
-        for (int i = 0; i < boids.getGridSize(); i++) {
-            for (int j = 0; j < boids.getGridSize(); j++) {
-                for (Boid boid : boids.getBoidGrid()[i][j])
-                    boids.computeNewBoidState(i, j, boid);
-            }
-        }
-        swapGrids();
-        draw();
-    }
-
-
-    @Override
-    public void restart() {
-        emptyGrid();
-        fillGrid();
-        draw();
-    }
-*/
-
     @Override
     public final void next() {
         manager.next();
@@ -114,5 +91,4 @@ public class BoidsSimulator implements Simulable {
     public Event getStartingEvent() {
         return new BoidsEvent(manager, true, this, boids, 0);
     }
-
 }

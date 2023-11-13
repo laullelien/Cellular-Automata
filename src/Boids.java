@@ -145,4 +145,8 @@ public class Boids {
     public int getGridSize() {
         return gridSize;
     }
+
+    public void copyBoid(int i, int j, Boid boid) {
+        newBoidGrid[i][j].add(boid);
+    }
 }
