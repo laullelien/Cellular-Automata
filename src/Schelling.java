@@ -122,11 +122,6 @@ public class Schelling extends GridSimulable {
     }
 
     @Override
-    public Event getCurrentEvent() {
-        return new MessageEvent(0, "Not implemented yet!");
-    }
-
-    @Override
     public Event getStartingEvent() {
         return new MessageEvent(0, "Not implemented yet!");
     }

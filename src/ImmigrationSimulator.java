@@ -23,13 +23,9 @@ public class ImmigrationSimulator extends GridSimulable {
     }
 
     @Override
-    public Event getCurrentEvent() {
-        return new ImmNextEvent(super.getManager().getCurrentDate(), this.immigration, this);
-    }
-
-    @Override
     public Event getStartingEvent() {
-        return new ImmNextEvent(0, this.immigration, this);
+        return new ImmNextEvent(0,
+                this.immigration, this, super.getManager());
     }
 
     /* @Override
