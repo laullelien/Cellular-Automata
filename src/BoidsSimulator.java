@@ -9,13 +9,14 @@ public class BoidsSimulator implements Simulable {
     final private Boids boids;
     final private GUISimulator gui;
     private final int windowSize;
+    EventManager manager;
             
     public BoidsSimulator(int windowSize, Color backgroundColor, Boids boids) {
         this.windowSize = windowSize;
         this.boids = boids;
         this.gui = new GUISimulator(windowSize, windowSize, backgroundColor, this);
-        fillGrid();
-        draw();
+        manager = new EventManager();
+        restart();
     }
     private void drawBoid(Boid boid) {
         BoidCaracteristics caracteristics = boid.getCaracteristics();
@@ -30,7 +31,7 @@ public class BoidsSimulator implements Simulable {
         gui.addGraphicalElement(new Triangle(DVector.toPoint(orientation), DVector.toPoint(rightPoint), DVector.toPoint(leftPoint), caracteristics.getColor()));
     }
 
-    private void draw() {
+    public void draw() {
         gui.reset();
         gui.addGraphicalElement(new Rectangle((windowSize + 1) / 2, (windowSize + 1) / 2, Color.black, Color.white, windowSize));
         for (int i = 0; i < boids.getGridSize(); i++) {
@@ -42,7 +43,7 @@ public class BoidsSimulator implements Simulable {
         }
     }
 
-    private void emptyGrid() {
+    public void emptyGrid() {
         for (int i = 0; i < boids.getGridSize(); i++) {
             for (int j = 0; j < boids.getGridSize(); j++) {
                 boids.getBoidGrid()[i][j].clear();
@@ -50,7 +51,7 @@ public class BoidsSimulator implements Simulable {
         }
     }
 
-    private void fillGrid() {
+    public void fillGrid() {
         gui.addGraphicalElement(new Rectangle((windowSize + 1) / 2, (windowSize + 1) / 2, Color.black, Color.white, windowSize));
         ArrayList<Boid> boidsList = boids.getBoidsList();
         for(Boid boid: boidsList) {
@@ -61,7 +62,7 @@ public class BoidsSimulator implements Simulable {
         }
     }
 
-    private void reInitializeNewGrid() {
+    public void reInitializeNewGrid() {
         for (int i = 0; i < boids.getGridSize(); i++) {
             for (int j = 0; j < boids.getGridSize(); j++) {
                 boids.getNewBoidGrid()[i][j].clear();
@@ -70,11 +71,12 @@ public class BoidsSimulator implements Simulable {
     }
     
 
-    private void swapGrids() {
+    public void swapGrids() {
         ArrayList<Boid>[][] temp = boids.getBoidGrid();
         boids.setBoidGrid(boids.getNewBoidGrid());
         boids.setNewBoidGrid(temp);
     }
+/*
     @Override
     public void next() {
         reInitializeNewGrid();
@@ -94,6 +96,23 @@ public class BoidsSimulator implements Simulable {
         emptyGrid();
         fillGrid();
         draw();
+    }
+*/
+
+    @Override
+    public final void next() {
+        manager.next();
+    }
+
+    @Override
+    public final void restart() {
+        manager.restart();
+        manager.addEvent(getStartingEvent());
+        next();
+    }
+
+    public Event getStartingEvent() {
+        return new BoidsEvent(manager, true, this, boids, 0);
     }
 
 }

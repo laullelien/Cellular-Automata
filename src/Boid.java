@@ -3,7 +3,7 @@ import java.util.Random;
 
 class TestBoid {
     public static void main(String[] args) {
-        BoidCaracteristics caracteristics = new BoidCaracteristics(Color.BLUE, 1, 12, 15, 0.03, 0.1, 100, 100, 0.2);
+        BoidCaracteristics caracteristics = new BoidCaracteristics(Color.BLUE, 1, 12, 15, 0.03, 0.1, 100, 100, 0.2, 1);
         Boid first = new Boid(caracteristics, new DVector(0, 0), new DVector(1, 0));
         Boid second = new Boid(caracteristics, new DVector(-1, 0), new DVector(-1, 0));
         System.out.println(first.getOrientation());

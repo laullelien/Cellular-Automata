@@ -20,8 +20,7 @@ public class SchellingSimulator extends GridSimulable {
         homelessFamilies = new LinkedList<>();
         availableHomes = new LinkedList<>();
         grid = new char[gridWidth][gridWidth];
-        initialiseGrid();
-        drawGrid();
+        super.restart();
     }
 
     public void moveHomelessFamiliesToAvailableHomes() {
@@ -114,23 +113,8 @@ public class SchellingSimulator extends GridSimulable {
         homelessFamilies.clear();
     }
 
-    /*@Override
-    public void restart() {
-        clearAvailableHomes();
-        clearHomelessFamilies();
-        initialiseGrid();
-        drawGrid();
-        addAvailableHomes();
-    }
-
-    @Override
-    public void next() {
-        moveHomelessFamiliesToAvailableHomes();
-        removeUnhappyFamilies();
-    }*/
-
     @Override
     public Event getStartingEvent() {
-        return new SchellingEvent(super.getManager(), true);
+        return new SchellingEvent(super.getManager(), true, this, 0);
     }
 }

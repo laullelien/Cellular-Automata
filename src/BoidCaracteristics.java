@@ -10,8 +10,9 @@ public class BoidCaracteristics {
     private final double separationConstant;
     private final double wallRepulsionConstant;
     private final double frictionConstant;
+    private final int updateTime;
 
-    public BoidCaracteristics(Color color, double mass, int boidSize, int velocityMax, double cohesionConstant, double alignmentConstant, double separationConstant, double wallRepulsionConstant, double frictionConstant) {
+    public BoidCaracteristics(Color color, double mass, int boidSize, int velocityMax, double cohesionConstant, double alignmentConstant, double separationConstant, double wallRepulsionConstant, double frictionConstant, int updateTime) {
         this.color = color;
         this.mass = mass;
         this.boidSize = boidSize;
@@ -21,6 +22,7 @@ public class BoidCaracteristics {
         this.separationConstant = separationConstant;
         this.wallRepulsionConstant = wallRepulsionConstant;
         this.frictionConstant = frictionConstant;
+        this.updateTime = updateTime;
     }
 
     public Color getColor() {
@@ -57,5 +59,9 @@ public class BoidCaracteristics {
 
     public double getFrictionConstant() {
         return frictionConstant;
+    }
+
+    public int getUpdateTime() {
+        return updateTime;
     }
 }
