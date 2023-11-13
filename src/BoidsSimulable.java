@@ -1,3 +1,4 @@
+/*
 import gui.GUISimulator;
 import gui.Rectangle;
 import gui.Simulable;
@@ -188,3 +189,4 @@ public class BoidsSimulable implements Simulable {
         draw();
     }
 }
+*/

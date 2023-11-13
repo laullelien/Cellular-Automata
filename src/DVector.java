@@ -130,6 +130,11 @@ public class DVector {
         return new DVector(x, y);
     }
 
+    public void nullify() {
+        x = 0;
+        y = 0;
+    }
+
     @Override
     public String toString() {
         return "x: " + x + " y: " + y;

@@ -6,27 +6,28 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class BoidsSimulator implements Simulable {
-    private Boids boids;
+    final private Boids boids;
     final private GUISimulator gui;
     private final int windowSize;
             
     public BoidsSimulator(int windowSize, Color backgroundColor, Boids boids) {
         this.windowSize = windowSize;
         this.boids = boids;
-        
         this.gui = new GUISimulator(windowSize, windowSize, backgroundColor, this);
+        fillGrid();
         draw();
     }
     private void drawBoid(Boid boid) {
+        BoidCaracteristics caracteristics = boid.getCaracteristics();
         DVector position = boid.getPosition();
         DVector orientation = boid.getOrientation();
-        orientation.mult(boids.getBoidSize());
+        orientation.mult(caracteristics.getBoidSize());
         DVector leftPoint = DVector.rotate(orientation, 150);
         DVector rightPoint = DVector.rotate(orientation, -150);
         orientation.add(position);
         leftPoint.add(position);
         rightPoint.add(position);
-        gui.addGraphicalElement(new Triangle(DVector.toPoint(orientation), DVector.toPoint(rightPoint), DVector.toPoint(leftPoint), boids.getBoidColor()));
+        gui.addGraphicalElement(new Triangle(DVector.toPoint(orientation), DVector.toPoint(rightPoint), DVector.toPoint(leftPoint), caracteristics.getColor()));
     }
 
     private void draw() {
@@ -51,8 +52,9 @@ public class BoidsSimulator implements Simulable {
 
     private void fillGrid() {
         gui.addGraphicalElement(new Rectangle((windowSize + 1) / 2, (windowSize + 1) / 2, Color.black, Color.white, windowSize));
-        for (int i = 0; i < boids.getBoidNumber(); i++) {
-            Boid boid = new Boid(windowSize, boids.getBoidSize() / 2);
+        ArrayList<Boid> boidsList = boids.getBoidsList();
+        for(Boid boid: boidsList) {
+            boid.randomize(windowSize);
             Point coordinates = DVector.getCoordinates(boid.getPosition(), boids.getNeighbourInfluenceCircleDiametre());
             boids.getBoidGrid()[coordinates.x][coordinates.y].add(boid);
             drawBoid(boid);

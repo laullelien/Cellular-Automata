@@ -2,9 +2,13 @@ import java.awt.*;
 
 public class TestBoidsSimulator {
     public static void main(String[] args) {
-        Boids b1 = new Boids(500, 0.03,0.1,100,
-                100, 0.2, 15, 50, 100,
-                1, 12, 20, Color.BLUE);
-        BoidsSimulator sim = new BoidsSimulator(500, Color.WHITE, b1);
+        BoidCaracteristics blueCaracteristics = new BoidCaracteristics(Color.BLUE, 1, 12, 2, 0.03, 0.1, 100, 100, 0.2);
+        BoidCaracteristics redCaracteristics = new BoidCaracteristics(Color.RED, 10, 30, 1, 0.01, 0.05, 300, 50, 0.1);
+        BoidCaracteristics greenCaracteristics = new BoidCaracteristics(Color.GREEN, 0.1, 3, 5, 0.09, 0.2, 100, 10, 0.1);
+        Boids boids = new Boids(500, 20);
+        boids.addBoidGroup(30, blueCaracteristics);
+        boids.addBoidGroup(15, redCaracteristics);
+        boids.addBoidGroup(50, greenCaracteristics);
+        new BoidsSimulator(500, Color.WHITE, boids);
     }
 }
