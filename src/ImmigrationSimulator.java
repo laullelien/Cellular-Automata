@@ -28,34 +28,4 @@ public class ImmigrationSimulator extends GridSimulable {
                 this.immigration, this, super.getManager());
     }
 
-    /* @Override
-     *//*
-     *//*
-    public void next() {
-        immigration.statesUpdate(immigration.getCellsToUpdate());
-        immigration.getCellsToUpdate().clear();
-
-        for (int i = 0; i < immigration.getGridWidth(); i++) {
-            for (int j = 0; j < immigration.getGridWidth(); j++) {
-                int currentState = immigration.getStatesGrid()[i][j];
-
-                if (immigration.isPrepared(i, j, immigration.getGridWidth(), currentState)) {
-                    putColorState(immigration.nextState(currentState), i, j);
-                    immigration.getCellsToUpdate().add(i);
-                    immigration.getCellsToUpdate().add(j);
-                }
-            }
-        }
-    }*/
-
-/*    @Override
-    public void restart() {
-        for (int i=0; i<immigration.getGridWidth(); i++) {
-            for (int j=0; j<immigration.getGridWidth(); j++) {
-                stateInit(i,j);
-            }
-        }
-        immigration.getCellsToUpdate().clear();
-    }*/
-
 }

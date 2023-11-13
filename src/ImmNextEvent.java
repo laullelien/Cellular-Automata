@@ -19,6 +19,7 @@ public class ImmNextEvent extends Event {
                 }
             }
             immigration.getCellsToUpdate().clear();
+
         } else if (this.getDate() > 0) {
             immigration.statesUpdate(immigration.getCellsToUpdate());
             immigration.getCellsToUpdate().clear();

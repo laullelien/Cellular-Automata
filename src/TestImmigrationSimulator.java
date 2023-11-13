@@ -1,5 +1,13 @@
 import java.awt.*;
 
+class VerySmallTwoColors {
+    public static void main(String[] args) {
+        Color[] colors = {new Color(10, 10, 100), new Color(255, 255, 255) };
+        Immigration i = new Immigration(4, 2, colors);
+        new ImmigrationSimulator(100, i);
+    }
+}
+
 class SmallTwoColors {
     public static void main(String[] args) {
         Color[] colors = {new Color(10, 10, 100), new Color(255, 255, 255) };
@@ -8,7 +16,7 @@ class SmallTwoColors {
     }
 }
 
-class Small {
+class SmallFourColors {
     public static void main(String[] args) {
         Color[] colors = {new Color(10, 10, 100),new Color(100, 0,200), new Color(190, 0, 200),
                 new Color(255, 255, 255) };
