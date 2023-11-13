@@ -1,26 +1,19 @@
 import java.awt.Color;
 import java.util.LinkedList;
-import java.util.Random;
 
-public class TestImmigration {
-    public static void main(String[] args) {
-        Color[] colorStates = {new Color(10, 10, 100),new Color(100, 0,200), new Color(255, 255, 255) };
-        new Immigration(550, 50, 3, colorStates);
-    }
-}
-class Immigration extends GridSimulable {
+public class Immigration {
     private int nbStates;
     private Color[] colorStates;
     private final static int NB_STATES_MAX = 100;
+    private final int gridWidth;
     private final int[][] statesGrid;
     LinkedList<Integer> cellsToUpdate = new LinkedList<>();
 
-    public Immigration(int windowSize, int gridWidth, int nbStates, Color[] colorStates) {
-        super(windowSize, gridWidth);
+    public Immigration(int gridWidth, int nbStates, Color[] colorStates) {
         setNbStates(nbStates);
         setColorStates(nbStates, colorStates);
+        this.gridWidth =  gridWidth;
         this.statesGrid = new int[gridWidth][gridWidth];
-        restart();
     }
 
     public int[][] getStatesGrid() {
@@ -31,11 +24,18 @@ class Immigration extends GridSimulable {
         return cellsToUpdate;
     }
 
+    public Color[] getColorStates() {return colorStates; }
+
+    public int getNbStates() {return nbStates; }
+
+    public int getGridWidth() {return gridWidth; }
+
     public void setNbStates(int nbStates) {
         if (nbStates <= NB_STATES_MAX) {
             this.nbStates = nbStates;
         } else {
-            throw new IllegalArgumentException("Le nombre d'états choisi est trop grand !");
+            throw new IllegalArgumentException("Le nombre d'états " +
+                    "choisi est trop grand !");
         }
     }
 
@@ -44,13 +44,10 @@ class Immigration extends GridSimulable {
             this.colorStates = new Color[nbStates];
             System.arraycopy(colorStates, 0, this.colorStates, 0, nbStates);
         } else {
-            throw new IllegalArgumentException("Le nombre de couleurs choisi est insuffisant par rapport au nombre d'états !");
+            throw new IllegalArgumentException("Le nombre de couleurs choisi est " +
+                    "insuffisant par rapport au nombre d'états !");
         }
 
-    }
-
-    public void putColorState(int stateIndex, int x, int y) {
-        super.colorCell(colorStates[stateIndex], x, y);
     }
 
     public int nextState(int stateIndex) {
@@ -58,7 +55,8 @@ class Immigration extends GridSimulable {
     }
 
     /*
-    * Check if the adjacent cells of the (x,y) cell in state k can be updated into the next state k+1:
+    * Check if the adjacent cells of the (x,y) cell in state k can be
+    * updated into the next state k+1:
     * if it has 3 or more adjacent cells in the state k+1
     * */
     public int nbAjdPrepared(int x, int y, int gridWidth, int nextState) {
@@ -100,46 +98,4 @@ class Immigration extends GridSimulable {
             statesGrid[x][y] = nextState(statesGrid[x][y]);
         }
     }
-
-    @Override
-    /*
-    * Problem: the grid needs to be reset at each iteration
-    * Keep the states of all the cells in a Matrix ? costs a lot of space
-    */
-    public void next() {
-        statesUpdate(this.cellsToUpdate);
-        this.cellsToUpdate.clear();
-
-        for (int i = 0; i < this.getGridWidth(); i++) {
-            for (int j = 0; j < this.getGridWidth(); j++) {
-                int currentState = statesGrid[i][j];
-
-                if (isPrepared(i, j, this.getGridWidth(), currentState)) {
-                    putColorState(nextState(currentState), i, j);
-                    cellsToUpdate.add(i);
-                    cellsToUpdate.add(j);
-                }
-            }
-        }
-    }
-
-    public void stateInit(int i, int j, int nbStates) {
-        Random random = new Random();
-        int stateIndex = random.nextInt(nbStates);
-
-        putColorState(stateIndex, i, j);
-
-        statesGrid[i][j] = stateIndex;
-    }
-
-    @Override
-    public void restart() {
-        for (int i=0; i<this.getGridWidth(); i++) {
-            for (int j=0; j<this.getGridWidth(); j++) {
-                stateInit(i,j,nbStates);
-            }
-        }
-        this.cellsToUpdate.clear();
-    }
-
 }

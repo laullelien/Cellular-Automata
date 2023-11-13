@@ -20,13 +20,16 @@ public class EventManager {
         this.currentDate = currentDate;
         this.events = events;
     }
+
+    public long getCurrentDate() { return currentDate; }
+
     public void addEvent(Event e) {
         this.events.add(e);
     }
 
     public void next() {
         Event e = events.poll();
-        while (e != null && e.getDate() < currentDate) {
+        while (e != null && e.getDate() <= currentDate) {
             e.execute();
             e = events.poll();
         }
@@ -41,7 +44,7 @@ public class EventManager {
     }
 
     public void restart(){
-
+        events.clear();
     }
 
 }

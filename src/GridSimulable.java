@@ -8,6 +8,7 @@ public abstract class GridSimulable implements Simulable {
     final private GUISimulator gui;
     final private int windowSize;
     final private int GridWidth;
+    final private EventManager manager = new EventManager();
 
     /*
     cellSize must be odd and must divide windowSize
@@ -19,10 +20,21 @@ public abstract class GridSimulable implements Simulable {
     }
 
     @Override
-    public abstract void next();
+    public void next() {
+        manager.next();
+        manager.addEvent(getCurrentEvent());
+    };
 
     @Override
-    public abstract void restart();
+    public void restart() {
+        manager.restart();
+        manager.addEvent(getStartingEvent());
+        next();
+    };
+
+    public abstract Event getCurrentEvent();
+
+    public abstract Event getStartingEvent();
 
     public void colorCell(Color color, int x, int y) {
         int cellSize = windowSize / GridWidth;
@@ -36,5 +48,9 @@ public abstract class GridSimulable implements Simulable {
 
     public int getGridWidth() {
         return GridWidth;
+    }
+
+    public EventManager getManager() {
+        return manager;
     }
 }
