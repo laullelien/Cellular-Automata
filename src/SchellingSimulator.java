@@ -3,7 +3,7 @@ import java.util.LinkedList;
 import java.util.Random;
 
 
-public class Schelling extends GridSimulable {
+public class SchellingSimulator extends GridSimulable {
     final LinkedList<Character> homelessFamilies;
     final LinkedList<Point> availableHomes;
     final private char[][] grid;
@@ -12,7 +12,7 @@ public class Schelling extends GridSimulable {
     private final char colorNumber;
 
 
-    public Schelling(int windowSize, int gridWidth, int K, char colorNumber, Color[] colors) {
+    public SchellingSimulator(int windowSize, int gridWidth, int K, char colorNumber, Color[] colors) {
         super(windowSize, gridWidth);
         this.K = K;
         this.colorNumber = colorNumber;
@@ -24,7 +24,7 @@ public class Schelling extends GridSimulable {
         drawGrid();
     }
 
-    private void moveHomelessFamiliesToAvailableHomes() {
+    public void moveHomelessFamiliesToAvailableHomes() {
         Random generator = new Random();
         while (availableHomes.size() != 0 && homelessFamilies.size() != 0) {
             char family = homelessFamilies.getFirst();
@@ -40,7 +40,7 @@ public class Schelling extends GridSimulable {
     /*
     Initializes the grid randomly
      */
-    private void initialiseGrid() {
+    public void initialiseGrid() {
         int gridWidth = super.getGridWidth();
         Random generator = new Random();
         for (int i = 0; i < gridWidth; i++) {
@@ -50,7 +50,7 @@ public class Schelling extends GridSimulable {
         }
     }
 
-    private void drawGrid() {
+    public void drawGrid() {
         int gridWidth = super.getGridWidth();
         for (int i = 0; i < gridWidth; i++) {
             for (int j = 0; j < gridWidth; j++) {
@@ -59,7 +59,7 @@ public class Schelling extends GridSimulable {
         }
     }
 
-    private void addAvailableHomes() {
+    public void addAvailableHomes() {
         int gridWidth = super.getGridWidth();
         for (int i = 0; i < gridWidth; i++) {
             for (int j = 0; j < gridWidth; j++) {
@@ -73,7 +73,7 @@ public class Schelling extends GridSimulable {
     /*
     A family is unhappy if there are more than K families of a different kind in the 8 families surrounding it
      */
-    private void removeUnhappyFamilies() {
+    public void removeUnhappyFamilies() {
         int gridWidth = super.getGridWidth();
         // Remove families that have more that have more than K neighbours of a different color
         for (int i = 0; i < gridWidth; i++) {
@@ -106,10 +106,18 @@ public class Schelling extends GridSimulable {
         }
     }
 
+    public void clearAvailableHomes() {
+        availableHomes.clear();
+    }
+
+    public void clearHomelessFamilies() {
+        homelessFamilies.clear();
+    }
+
     @Override
     public void restart() {
-        availableHomes.clear();
-        homelessFamilies.clear();
+        clearAvailableHomes();
+        clearHomelessFamilies();
         initialiseGrid();
         drawGrid();
         addAvailableHomes();
@@ -122,12 +130,7 @@ public class Schelling extends GridSimulable {
     }
 
     @Override
-    public Event getCurrentEvent() {
-        return new MessageEvent(0, "Not implemented yet!");
-    }
-
-    @Override
     public Event getStartingEvent() {
-        return new MessageEvent(0, "Not implemented yet!");
+        return new SchellingEvent(super.getManager(), true);
     }
 }
