@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class ImmigrationSimulator extends GridSimulable {
     final private Immigration immigration;
-    
+
     public ImmigrationSimulator(int windowSize, Immigration immigration) {
         super(windowSize, immigration.getGridWidth());
         this.immigration = immigration;
@@ -29,7 +29,7 @@ public class ImmigrationSimulator extends GridSimulable {
     }
 
     /* @Override
-    *//*
+     *//*
      *//*
     public void next() {
         immigration.statesUpdate(immigration.getCellsToUpdate());
