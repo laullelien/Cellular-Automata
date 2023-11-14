@@ -48,10 +48,13 @@ public class Boids {
         DVector position = boid.getPosition();
         BoidCaracteristics caracteristics = boid.getCaracteristics();
         DVector separationVector = DVector.minus(position, other.getPosition());
-        // Cohesion
-        acceleration.add(DVector.mult(separationVector, -caracteristics.getCohesionConstant()));
-        // Alignment
-        acceleration.add(DVector.mult(other.getVelocity(), caracteristics.getAlignmentConstant()));
+        // Only apply Cohesion and Alignment to boids of the same family, i.e. the same characteristics
+        if (boid.getCaracteristics() == other.getCaracteristics()) {
+            // Cohesion
+            acceleration.add(DVector.mult(separationVector, -caracteristics.getCohesionConstant()));
+            // Alignment
+            acceleration.add(DVector.mult(other.getVelocity(), caracteristics.getAlignmentConstant()));
+        }
         // Separation
         acceleration.add(DVector.mult(separationVector, caracteristics.getSeparationConstant() / DVector.dotProduct(separationVector, separationVector)));
     }
@@ -92,12 +95,12 @@ public class Boids {
         // Take the average for each law
         if (neighbourNumber > 0)
             acceleration.mult(1 / neighbourNumber);
+        // Take mass into account
+        acceleration.mult(1 / caracteristics.getMass());
 
         addWallRepulsion(boid, acceleration);
         addFriction(boid, acceleration);
 
-        // Take mass into account
-        acceleration.mult(1 / caracteristics.getMass());
         updateBoidState(boid, acceleration);
     }
 
