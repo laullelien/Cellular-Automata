@@ -1,5 +1,8 @@
 import gui.Simulable;
 
+/*
+Simulable that uses the principle of events
+ */
 public abstract class EventSimulable implements Simulable {
 
     private final EventManager manager;

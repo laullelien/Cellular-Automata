@@ -34,6 +34,10 @@ public class Boid {
         this.velocity = velocity;
     }
 
+    /*
+    Generates a boid with random positions (inside the window)
+    and velocities (less than the boid's size)
+     */
     public Boid(BoidCaracteristics caracteristics, int windowSize) {
         Random r = new Random();
         int boidSize = caracteristics.getBoidSize();
@@ -44,8 +48,10 @@ public class Boid {
         this.caracteristics = caracteristics;
     }
 
-    public boolean isVisible(Boid b) {
-        DVector vectorBoids = DVector.minus(b.position, this.position);
+    //Determines if the other boid isn't too much behind
+    // this boid to influence it
+    public boolean isVisible(Boid other) {
+        DVector vectorBoids = DVector.minus(other.position, this.position);
 
         DVector orientation = this.getOrientation();
         vectorBoids.selfNormalize();
@@ -71,6 +77,9 @@ public class Boid {
         return caracteristics;
     }
 
+    /*
+    Recomputes random positions and velocities for this boid
+     */
     public void randomize(int windowSize) {
         int boidSize = caracteristics.getBoidSize();
         position.randomize(windowSize);

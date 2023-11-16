@@ -23,6 +23,7 @@ public class BoidsEvent extends Event {
             for (int i = 0; i < boids.getGridSize(); i++) {
                 for (int j = 0; j < boids.getGridSize(); j++) {
                     for (Boid boid : boids.getBoidGrid()[i][j]) {
+                        // Take into account the different boid update time
                         if (super.getDate() % boid.getCaracteristics().getUpdateTime() == 0) {
                             boids.computeNewBoidState(i, j, boid);
                         } else {

@@ -1,27 +1,33 @@
 import java.awt.*;
 
+/*
+Stores all the characteristics of a boid
+ */
 public class BoidCaracteristics {
     private final Color color;
     private final double mass;
     private final int boidSize;
-    private final int velocityMax;
+    private final int frictionVelocityThreshold;
     private final double cohesionConstant;
     private final double alignmentConstant;
     private final double separationConstant;
     private final double wallRepulsionConstant;
-    private final double frictionVelocityThreshold;
+    private final double frictionConstant;
+    /*
+    The number of frame taken to update its state
+     */
     private final int updateTime;
 
-    public BoidCaracteristics(Color color, double mass, int boidSize, int velocityMax, double cohesionConstant, double alignmentConstant, double separationConstant, double wallRepulsionConstant, double frictionVelocityThreshold, int updateTime) {
+    public BoidCaracteristics(Color color, double mass, int boidSize, int frictionVelocityThreshold, double cohesionConstant, double alignmentConstant, double separationConstant, double wallRepulsionConstant, double frictionConstant, int updateTime) {
         this.color = color;
         this.mass = mass;
         this.boidSize = boidSize;
-        this.velocityMax = velocityMax;
+        this.frictionVelocityThreshold = frictionVelocityThreshold;
         this.cohesionConstant = cohesionConstant;
         this.alignmentConstant = alignmentConstant;
         this.separationConstant = separationConstant;
         this.wallRepulsionConstant = wallRepulsionConstant;
-        this.frictionVelocityThreshold = frictionVelocityThreshold;
+        this.frictionConstant = frictionConstant;
         this.updateTime = updateTime;
     }
 
@@ -37,8 +43,8 @@ public class BoidCaracteristics {
         return boidSize;
     }
 
-    public int getVelocityMax() {
-        return velocityMax;
+    public int getFrictionVelocityThreshold() {
+        return frictionVelocityThreshold;
     }
 
     public double getCohesionConstant() {
@@ -57,8 +63,8 @@ public class BoidCaracteristics {
         return wallRepulsionConstant;
     }
 
-    public double getFrictionVelocityThreshold() {
-        return frictionVelocityThreshold;
+    public double getFrictionConstant() {
+        return frictionConstant;
     }
 
     public int getUpdateTime() {

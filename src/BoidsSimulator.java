@@ -15,8 +15,13 @@ public class BoidsSimulator extends EventSimulable {
         this.windowSize = windowSize;
         this.boids = boids;
         this.gui = new GUISimulator(windowSize, windowSize, backgroundColor, this);
-        restart();
+        super.restart();
     }
+
+    /*
+    Computes the points needed to draw the triangle representing the boid
+    and draws it
+     */
     private void drawBoid(Boid boid) {
         BoidCaracteristics caracteristics = boid.getCaracteristics();
         DVector position = boid.getPosition();
@@ -33,9 +38,11 @@ public class BoidsSimulator extends EventSimulable {
     public void draw() {
         gui.reset();
         gui.addGraphicalElement(new Rectangle((windowSize + 1) / 2, (windowSize + 1) / 2, Color.black, Color.white, windowSize));
-        for (int i = 0; i < boids.getGridSize(); i++) {
-            for (int j = 0; j < boids.getGridSize(); j++) {
-                for (Boid boid : boids.getBoidGrid()[i][j]) {
+        int gridSize = boids.getGridSize();
+        ArrayList<Boid>[][] grid = boids.getBoidGrid();
+        for (int i = 0; i < gridSize; i++) {
+            for (int j = 0; j < gridSize; j++) {
+                for (Boid boid : grid[i][j]) {
                     drawBoid(boid);
                 }
             }
@@ -43,17 +50,23 @@ public class BoidsSimulator extends EventSimulable {
     }
 
     public void emptyGrid() {
-        for (int i = 0; i < boids.getGridSize(); i++) {
-            for (int j = 0; j < boids.getGridSize(); j++) {
-                boids.getBoidGrid()[i][j].clear();
+        int gridSize = boids.getGridSize();
+        ArrayList<Boid>[][] grid = boids.getBoidGrid();
+        for (int i = 0; i < gridSize; i++) {
+            for (int j = 0; j < gridSize; j++) {
+                grid[i][j].clear();
             }
         }
     }
 
+    /*
+    Resets the boid grid with the same boids as before but
+    with new random positions and velocities and draws them
+     */
     public void fillGrid() {
         gui.addGraphicalElement(new Rectangle((windowSize + 1) / 2, (windowSize + 1) / 2, Color.black, Color.white, windowSize));
         ArrayList<Boid> boidsList = boids.getBoidsList();
-        for(Boid boid: boidsList) {
+        for (Boid boid : boidsList) {
             boid.randomize(windowSize);
             Point coordinates = DVector.getCoordinates(boid.getPosition(), boids.getNeighbourInfluenceCircleDiametre());
             boids.getBoidGrid()[coordinates.x][coordinates.y].add(boid);
@@ -68,13 +81,14 @@ public class BoidsSimulator extends EventSimulable {
             }
         }
     }
-    
+
 
     public void swapGrids() {
         ArrayList<Boid>[][] temp = boids.getBoidGrid();
         boids.setBoidGrid(boids.getNewBoidGrid());
         boids.setNewBoidGrid(temp);
     }
+
     public Event getStartingEvent() {
         return new BoidsEvent(super.getManager(), true, this, boids, 0);
     }

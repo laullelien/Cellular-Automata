@@ -7,6 +7,9 @@ class DVectorTest {
     }
 }
 
+/*
+Vectors of double numbers
+ */
 public class DVector {
     private double x;
     private double y;

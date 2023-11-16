@@ -1,13 +1,36 @@
 import java.awt.*;
 import java.util.ArrayList;
 
+/*
+Represent a collection of boid,
+which can have different characteristics
+ */
 public class Boids {
+    /*
+    Distance threshold under which boids influence each other
+     */
     final private int neighbourInfluenceCircleRadius;
     final private int neighbourInfluenceCircleDiametre;
+    /*
+    Arraylist storing all our boids.
+    They may have different characteristics
+     */
     final private ArrayList<Boid> boidsList;
     final private int windowSize;
+    /*
+    Number of cells in each dimension
+     */
     final private int gridSize;
+    /*
+    Grid used to store boids current state
+    and find all boids that influence a certain boid efficiently
+    Each cell is a vector of boids
+     */
     private ArrayList<Boid>[][] boidGrid;
+    /*
+    Same as boidGrid with the exception that this grid
+    is only used to compute the new boids state using the current grid
+     */
     private ArrayList<Boid>[][] newBoidGrid;
 
     public Boids(int windowSize, int neighbourInfluenceCircleRadius) {
@@ -27,13 +50,15 @@ public class Boids {
         }
     }
 
+    /*
+    Adds boidNumber boids with the same characteristics to our collection of boids
+     */
     public void addBoidGroup(int boidNumber, BoidCaracteristics groupCaracteristics) {
         for (int i = 0; i < boidNumber; i++) {
             boidsList.add(new Boid(groupCaracteristics, windowSize));
         }
     }
 
-    // Applies the 3 standard rules to the boids
     public void updateBoidState(Boid boid, DVector acceleration) {
         DVector newPosition = boid.getPosition().copy();
         DVector newVelocity = boid.getVelocity().copy();
@@ -44,6 +69,9 @@ public class Boids {
         newBoidGrid[coordinates.x][coordinates.y].add(new Boid(boid.getCaracteristics(), newPosition, newVelocity));
     }
 
+    /*
+    Knowing that boid and other influence each other, we
+     */
     private void addStandardRules(Boid boid, Boid other, DVector acceleration) {
         DVector position = boid.getPosition();
         BoidCaracteristics caracteristics = boid.getCaracteristics();
@@ -59,6 +87,7 @@ public class Boids {
         acceleration.add(DVector.mult(separationVector, caracteristics.getSeparationConstant() / DVector.dotProduct(separationVector, separationVector)));
     }
 
+    // Each border of the window repulses boids
     private void addWallRepulsion(Boid boid, DVector acceleration) {
         final double dWindowSize = windowSize;
         DVector position = boid.getPosition();
@@ -67,16 +96,19 @@ public class Boids {
         acceleration.add(wallRepulsion);
     }
 
+    // Adds a friction force that points to the opposite direction of the velocity
+    // if the velocity is higher that the velocity threshold
     private void addFriction(Boid boid, DVector acceleration) {
         DVector velocity = boid.getVelocity();
         BoidCaracteristics caracteristics = boid.getCaracteristics();
         double velocityMagnitude = velocity.magnitude();
-        if (velocityMagnitude > caracteristics.getVelocityMax())
-            acceleration.add(DVector.mult(velocity, -caracteristics.getFrictionVelocityThreshold()));
+        if (velocityMagnitude > caracteristics.getFrictionVelocityThreshold())
+            acceleration.add(DVector.mult(velocity, -caracteristics.getFrictionConstant()));
     }
 
     // Computes the new position, velocity and acceleration of boids and stores is in the new grid
-    // The grid is created in such a way that neighbours of a boid in a certain cell can only be found in the 8 neighbouring cells
+    // The grid is created in such a way that neighbours of a boid i.e. boids that may have influence on the boid
+    // can only be found in the 8 neighbouring cells of the boid's cell
     public void computeNewBoidState(int i, int j, Boid boid) {
         DVector acceleration = new DVector(0, 0);
         BoidCaracteristics caracteristics = boid.getCaracteristics();
@@ -92,7 +124,7 @@ public class Boids {
                 }
             }
         }
-        // Take the average for each law
+        // Take the average for each standard law
         if (neighbourNumber > 0)
             acceleration.mult(1 / neighbourNumber);
         // Take mass into account
@@ -110,6 +142,8 @@ public class Boids {
         return position.distanceTo(otherPosition) <= neighbourInfluenceCircleRadius;
     }
 
+    // Sets the position 1 pixel away from the border of the window
+    // if the position is outside the window
     private void fixPosition(DVector newPosition) {
         if (newPosition.getX() <= 0) newPosition.setX(1);
         else if (newPosition.getX() >= windowSize) newPosition.setX(windowSize - 1);

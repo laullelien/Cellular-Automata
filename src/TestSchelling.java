@@ -34,6 +34,6 @@ class TestShellingBig4Colors {
 
     public static void main(String[] args) {
         final Color[] colors = {Color.white, Color.blue, Color.red, Color.green, Color.magenta, Color.orange, Color.pink};
-        SchellingSimulator test = new SchellingSimulator(800, 100, 3, (char)6, colors);
+        SchellingSimulator test = new SchellingSimulator(800, 100, 5, (char)6, colors);
     }
 }
