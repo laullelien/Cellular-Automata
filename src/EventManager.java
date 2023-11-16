@@ -53,7 +53,7 @@ public class EventManager {
         this.currentDate += 1;
     }
     /**
-    * Retourne __true__ si plus aucun évènement n'est en attente d'exécution
+    * Retourne true si plus aucun évènement n'est en attente d'exécution
     * */
     public boolean isFinished() {
         return (events.isEmpty());

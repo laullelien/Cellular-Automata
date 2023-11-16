@@ -1,5 +1,5 @@
 /**
-* Represents executable events defined by their date
+ * Représente des événements exécutables définis par leur date
 * */
 public abstract class Event {
     final private long DATE;
