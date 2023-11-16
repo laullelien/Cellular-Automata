@@ -12,7 +12,7 @@ public class Immigration {
     public Immigration(int gridWidth, int nbStates, Color[] colorStates) {
         setNbStates(nbStates);
         setColorStates(nbStates, colorStates);
-        this.gridWidth =  gridWidth;
+        this.gridWidth = gridWidth;
         this.statesGrid = new int[gridWidth][gridWidth];
     }
 
@@ -24,11 +24,17 @@ public class Immigration {
         return cellsToUpdate;
     }
 
-    public Color[] getColorStates() {return colorStates; }
+    public Color[] getColorStates() {
+        return colorStates;
+    }
 
-    public int getNbStates() {return nbStates; }
+    public int getNbStates() {
+        return nbStates;
+    }
 
-    public int getGridWidth() {return gridWidth; }
+    public int getGridWidth() {
+        return gridWidth;
+    }
 
     public void setNbStates(int nbStates) {
         if (nbStates <= NB_STATES_MAX) {
@@ -40,7 +46,7 @@ public class Immigration {
     }
 
     public void setColorStates(int nbStates, Color[] colorStates) {
-        if (colorStates.length >= nbStates ) {
+        if (colorStates.length >= nbStates) {
             this.colorStates = new Color[nbStates];
             System.arraycopy(colorStates, 0, this.colorStates, 0, nbStates);
         } else {
@@ -55,45 +61,69 @@ public class Immigration {
     }
 
     /*
-    * Check if the adjacent cells of the (x,y) cell in state k can be
-    * updated into the next state k+1:
-    * if it has 3 or more adjacent cells in the state k+1
-    * */
+     * Check if the adjacent cells of the (x,y) cell in state k can be
+     * updated into the next state k+1:
+     * if it has 3 or more adjacent cells in the state k+1
+     * */
     public int nbAjdPrepared(int x, int y, int gridWidth, int nextState) {
         int countAdjPrep = 0;
-        int indLW = x-1;
-        int indMW = x+1;
-        int indLH = y-1;
-        int indMH = y+1;
+        int indLW = x - 1;
+        int indMW = x + 1;
+        int indLH = y - 1;
+        int indMH = y + 1;
 
-        if (indLW == -1) {indLW = gridWidth - 1;}
-        if (indMW == gridWidth) {indMW = 0;}
-        if (indLH == -1) {indLH = gridWidth - 1;}
-        if (indMH == gridWidth) {indMH = 0;}
-        
-        if (statesGrid[indLW][ indLH] == nextState) {countAdjPrep += 1;}
-        if (statesGrid[indLW][ y] == nextState) {countAdjPrep += 1;}
-        if (statesGrid[indLW][ indMH] == nextState) {countAdjPrep += 1;}
-        if (statesGrid[x][ indLH] == nextState) {countAdjPrep += 1;}
-        if (statesGrid[x][ indMH] == nextState) {countAdjPrep += 1;}
-        if (statesGrid[indMW][ indLH] == nextState) {countAdjPrep += 1;}
-        if (statesGrid[indMW][ y] == nextState) {countAdjPrep += 1;}
-        if (statesGrid[indMW][ indMH] == nextState) {countAdjPrep += 1;}
+        if (indLW == -1) {
+            indLW = gridWidth - 1;
+        }
+        if (indMW == gridWidth) {
+            indMW = 0;
+        }
+        if (indLH == -1) {
+            indLH = gridWidth - 1;
+        }
+        if (indMH == gridWidth) {
+            indMH = 0;
+        }
+
+        if (statesGrid[indLW][indLH] == nextState) {
+            countAdjPrep += 1;
+        }
+        if (statesGrid[indLW][y] == nextState) {
+            countAdjPrep += 1;
+        }
+        if (statesGrid[indLW][indMH] == nextState) {
+            countAdjPrep += 1;
+        }
+        if (statesGrid[x][indLH] == nextState) {
+            countAdjPrep += 1;
+        }
+        if (statesGrid[x][indMH] == nextState) {
+            countAdjPrep += 1;
+        }
+        if (statesGrid[indMW][indLH] == nextState) {
+            countAdjPrep += 1;
+        }
+        if (statesGrid[indMW][y] == nextState) {
+            countAdjPrep += 1;
+        }
+        if (statesGrid[indMW][indMH] == nextState) {
+            countAdjPrep += 1;
+        }
 
         return countAdjPrep;
     }
 
     public boolean isPrepared(int x, int y, int gridWidth, int stateIndex) {
-        return nbAjdPrepared(x,y,gridWidth, nextState(stateIndex)) >= 3;
+        return nbAjdPrepared(x, y, gridWidth, nextState(stateIndex)) >= 3;
     }
 
     /*
-    * Update the grid with the change from the last next()
-    */
+     * Update the grid with the change from the last next()
+     */
     public void statesUpdate(LinkedList<Integer> cellsToUpdate) {
-        for (int i=0; i < cellsToUpdate.size(); i += 2) {
+        for (int i = 0; i < cellsToUpdate.size(); i += 2) {
             int x = cellsToUpdate.get(i);
-            int y = cellsToUpdate.get(i+1);
+            int y = cellsToUpdate.get(i + 1);
 
             statesGrid[x][y] = nextState(statesGrid[x][y]);
         }

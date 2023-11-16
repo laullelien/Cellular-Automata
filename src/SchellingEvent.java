@@ -1,23 +1,24 @@
-public class SchellingEvent extends Event{
+public class SchellingEvent extends Event {
     private final EventManager manager;
     final boolean starting;
     SchellingSimulator game;
+
     public SchellingEvent(EventManager manager, boolean starting, SchellingSimulator game, long date) {
         super(date);
         this.manager = manager;
         this.starting = starting;
         this.game = game;
     }
+
     @Override
     public void execute() {
-        if(starting) {
+        if (starting) {
             game.clearAvailableHomes();
             game.clearHomelessFamilies();
             game.initialiseGrid();
             game.addAvailableHomes();
             game.drawGrid();
-        }
-        else {
+        } else {
             game.moveHomelessFamiliesToAvailableHomes();
             game.removeUnhappyFamilies();
         }

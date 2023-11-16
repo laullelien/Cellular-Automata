@@ -36,7 +36,7 @@ public class ImmNextEvent extends Event {
                 }
             }
         }
-        ImmNextEvent newEvent = new ImmNextEvent(this.getDate()+1,
+        ImmNextEvent newEvent = new ImmNextEvent(this.getDate() + 1,
                 this.immigration, this.sim, this.manager);
         this.manager.addEvent(newEvent);
     }

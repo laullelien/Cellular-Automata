@@ -30,8 +30,8 @@ public class TestInvader {
 class Invader implements Simulable {
     /**
      * L'interface graphique associé        GUISimulator gui = new GUISimulator(500, 500, Color.BLACK);
-        gui.setSimulable(new BallsSimulator());
-e
+     * gui.setSimulable(new BallsSimulator());
+     * e
      */
     private final GUISimulator gui;
 

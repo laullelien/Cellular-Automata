@@ -5,12 +5,13 @@ public class EventManager {
     private long currentDate;
     private PriorityQueue<Event> events;
 
-    public EventManager(){
+    public EventManager() {
         this.currentDate = 0;
         Comparator<Event> dateComparator = Comparator.comparing(Event::getDate);
         this.events = new PriorityQueue<>(dateComparator);
     }
-    public EventManager(long currentDate){
+
+    public EventManager(long currentDate) {
         this.currentDate = currentDate;
         Comparator<Event> dateComparator = Comparator.comparing(Event::getDate);
         this.events = new PriorityQueue<>(dateComparator);
@@ -21,7 +22,9 @@ public class EventManager {
         this.events = events;
     }
 
-    public long getCurrentDate() { return currentDate; }
+    public long getCurrentDate() {
+        return currentDate;
+    }
 
     public void addEvent(Event e) {
         this.events.add(e);
@@ -33,7 +36,7 @@ public class EventManager {
             e.execute();
             e = events.poll();
         }
-        if (e != null){
+        if (e != null) {
             events.add(e);
         }
         this.currentDate += 1;
@@ -43,7 +46,7 @@ public class EventManager {
         return (events.isEmpty());
     }
 
-    public void restart(){
+    public void restart() {
         events.clear();
         this.currentDate = 0;
     }

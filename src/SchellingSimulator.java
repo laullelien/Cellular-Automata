@@ -113,13 +113,13 @@ public class SchellingSimulator extends GridSimulable {
                     for (int l = j - 1; l <= j + 1; l++) {
                         // Check whether the cell is in the grid ,isn't empty or of the same family
                         if (k >= 0 && k < gridWidth && l >= 0 && l < gridWidth && grid[k][l] != 0 && grid[i][j] != grid[k][l]) {
-                             diffrentNeighbours++;
+                            diffrentNeighbours++;
                         }
 
                     }
                 }
 
-                if ( diffrentNeighbours >= K) {
+                if (diffrentNeighbours >= K) {
                     homelessFamilies.add(grid[i][j]);
                     availableHomes.add(new Point(i, j));
                     grid[i][j] = 0;

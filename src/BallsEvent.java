@@ -1,4 +1,4 @@
-public class BallsEvent extends Event{
+public class BallsEvent extends Event {
     private final EventManager manager;
     final boolean starting;
     BallsSimulator game;
@@ -15,14 +15,13 @@ public class BallsEvent extends Event{
     @Override
     public void execute() {
         Vector[] velocity = game.getVelocity();
-        if(starting) {
+        if (starting) {
             balls.reInit();
             for (int i = 0; i < balls.getBallNumber(); i++) {
                 velocity[i].set(10, 10);
             }
             game.draw();
-        }
-        else {
+        } else {
             int windowSize = game.getWindowSize();
             // Mirrors the velocity if the ball goes outside the window in the next frame
             for (int i = 0; i < balls.getBallNumber(); i++) {
