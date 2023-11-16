@@ -5,17 +5,16 @@ import gui.Simulable;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class BoidsSimulator implements Simulable {
+public class BoidsSimulator extends EventSimulable {
     final private Boids boids;
     final private GUISimulator gui;
     private final int windowSize;
-    EventManager manager;
-            
+
     public BoidsSimulator(int windowSize, Color backgroundColor, Boids boids) {
+        super();
         this.windowSize = windowSize;
         this.boids = boids;
         this.gui = new GUISimulator(windowSize, windowSize, backgroundColor, this);
-        manager = new EventManager();
         restart();
     }
     private void drawBoid(Boid boid) {
@@ -76,19 +75,7 @@ public class BoidsSimulator implements Simulable {
         boids.setBoidGrid(boids.getNewBoidGrid());
         boids.setNewBoidGrid(temp);
     }
-    @Override
-    public final void next() {
-        manager.next();
-    }
-
-    @Override
-    public final void restart() {
-        manager.restart();
-        manager.addEvent(getStartingEvent());
-        next();
-    }
-
     public Event getStartingEvent() {
-        return new BoidsEvent(manager, true, this, boids, 0);
+        return new BoidsEvent(super.getManager(), true, this, boids, 0);
     }
 }

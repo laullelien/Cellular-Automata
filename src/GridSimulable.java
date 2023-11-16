@@ -4,31 +4,19 @@ import gui.Simulable;
 
 import java.awt.*;
 
-public abstract class GridSimulable implements Simulable {
+public abstract class GridSimulable extends EventSimulable {
     final private GUISimulator gui;
     final private int windowSize;
     final private int GridWidth;
-    final private EventManager manager = new EventManager();
 
     /*
     cellSize must be odd and must divide windowSize
      */
     public GridSimulable(int windowSize, int width) {
+        super();
         this.windowSize = windowSize;
         this.GridWidth = width;
         this.gui = new GUISimulator(this.windowSize, this.windowSize, Color.white, this);
-    }
-
-    @Override
-    public final void next() {
-        manager.next();
-    }
-
-    @Override
-    public final void restart() {
-        manager.restart();
-        manager.addEvent(getStartingEvent());
-        next();
     }
 
     public abstract Event getStartingEvent();
@@ -47,7 +35,8 @@ public abstract class GridSimulable implements Simulable {
         return GridWidth;
     }
 
+    @Override
     public EventManager getManager() {
-        return manager;
+        return super.getManager();
     }
 }

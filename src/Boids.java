@@ -72,7 +72,7 @@ public class Boids {
         BoidCaracteristics caracteristics = boid.getCaracteristics();
         double velocityMagnitude = velocity.magnitude();
         if (velocityMagnitude > caracteristics.getVelocityMax())
-            acceleration.add(DVector.mult(velocity, -caracteristics.getFrictionConstant()));
+            acceleration.add(DVector.mult(velocity, -caracteristics.getFrictionVelocityThreshold()));
     }
 
     // Computes the new position, velocity and acceleration of boids and stores is in the new grid
