@@ -1,5 +1,7 @@
 import java.util.Random;
-
+/*
+* Simulates an instance of the Immigration class via a graphical interface
+* */
 public class ImmigrationSimulator extends GridSimulable {
     final private Immigration immigration;
 

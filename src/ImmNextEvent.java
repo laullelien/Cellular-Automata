@@ -1,3 +1,7 @@
+/*
+* Next time frame event for the immigration game
+* It's used when clicking the "Suivant" or "Début" buttons in the graphical interface.
+* */
 public class ImmNextEvent extends Event {
     Immigration immigration;
     ImmigrationSimulator sim;

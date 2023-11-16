@@ -1,6 +1,8 @@
 import java.util.Comparator;
 import java.util.PriorityQueue;
-
+/*
+* Executes (or not) subclass(es) of Event based on currentDate in chronological order
+* */
 public class EventManager {
     private long currentDate;
     private PriorityQueue<Event> events;

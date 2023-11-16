@@ -1,3 +1,6 @@
+/*
+* Represents executable events defined by their date
+* */
 public abstract class Event {
     final private long DATE;
 
