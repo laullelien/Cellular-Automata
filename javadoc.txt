@@ -1,0 +1,2 @@
+depuis src :
+javadoc -sourcepath ./ -d ../doc/docs_try_again -classpath ../lib/gui.jar -link ../doc/gui ImmigrationSimulator.java
