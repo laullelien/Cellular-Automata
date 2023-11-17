@@ -33,8 +33,7 @@ public class GameOfLifeSimulator extends GridSimulable {
         colors = new Color[]{deadCellColor, aliveCellColor};
         currentGrid = new int[gridWidth][gridWidth];
         nextGrid = new int[gridWidth][gridWidth];
-        initialiseGridRandomly();
-        drawGrid();
+        super.restart();
     }
 
     public void initialiseGridRandomly() {
