@@ -24,15 +24,29 @@ class TestShellingSmall4Colors {
     }
 }
 
-class TestShellingMedium4Colors {
+class TestShellingMedium3Colors {
+
+    public static void main(String[] args) {
+        final Color[] colors = {Color.white, Color.blue, Color.red, Color.green};
+        SchellingSimulator test = new SchellingSimulator(800, 20, 2, (char) 6, colors);
+    }
+}
+class TestShellingMedium6Colors {
 
     public static void main(String[] args) {
         final Color[] colors = {Color.white, Color.blue, Color.red, Color.green, Color.magenta, Color.orange, Color.pink};
         SchellingSimulator test = new SchellingSimulator(800, 20, 5, (char) 6, colors);
     }
 }
+class TestShellingBig3Colors {
 
-class TestShellingBig4Colors {
+    public static void main(String[] args) {
+        final Color[] colors = {Color.white, Color.blue, Color.red, Color.green};
+        SchellingSimulator test = new SchellingSimulator(800, 100, 3, (char) 3, colors);
+    }
+}
+
+class TestShellingBig6Colors {
 
     public static void main(String[] args) {
         final Color[] colors = {Color.white, Color.blue, Color.red, Color.green, Color.magenta, Color.orange, Color.pink};

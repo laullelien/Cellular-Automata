@@ -9,9 +9,6 @@ public abstract class GridSimulable extends EventSimulable {
     final private int windowSize;
     final private int GridWidth;
 
-    /*
-    cellSize must be odd and must divide windowSize
-     */
     public GridSimulable(int windowSize, int width) {
         super();
         this.windowSize = windowSize;
