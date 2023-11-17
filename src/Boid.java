@@ -3,7 +3,7 @@ import java.util.Random;
 
 class TestBoid {
     public static void main(String[] args) {
-        BoidCaracteristics caracteristics = new BoidCaracteristics(Color.BLUE, 1, 12, 15, 0.03, 0.1, 100, 100, 0.2, 1);
+        BoidCharacteristics caracteristics = new BoidCharacteristics(Color.BLUE, 1, 12, 15, 0.03, 0.1, 100, 100, 0.2, 1);
         Boid first = new Boid(caracteristics, new DVector(0, 0), new DVector(1, 0));
         Boid second = new Boid(caracteristics, new DVector(-1, 0), new DVector(-1, 0));
         System.out.println(first.getOrientation());
@@ -24,11 +24,11 @@ class TestBoid {
 
 public class Boid {
     final static private double visibilityThreshold = 0.9;
-    private final BoidCaracteristics caracteristics;
+    private final BoidCharacteristics caracteristics;
     final private DVector position;
     final private DVector velocity;
 
-    public Boid(BoidCaracteristics caracteristics, DVector position, DVector velocity) {
+    public Boid(BoidCharacteristics caracteristics, DVector position, DVector velocity) {
         this.caracteristics = caracteristics;
         this.position = position;
         this.velocity = velocity;
@@ -38,7 +38,7 @@ public class Boid {
     Generates a boid with random positions (inside the window)
     and velocities (less than the boid's size)
      */
-    public Boid(BoidCaracteristics caracteristics, int windowSize) {
+    public Boid(BoidCharacteristics caracteristics, int windowSize) {
         Random r = new Random();
         int boidSize = caracteristics.getBoidSize();
 
@@ -73,7 +73,7 @@ public class Boid {
         return this.velocity;
     }
 
-    public BoidCaracteristics getCaracteristics() {
+    public BoidCharacteristics getCaracteristics() {
         return caracteristics;
     }
 

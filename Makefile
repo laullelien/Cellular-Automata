@@ -39,6 +39,33 @@ compileTestGOLSimulator:
 runStandardCellsGOL: compileTestGOLSimulator
 	java -classpath bin:lib/gui.jar Test1_StandardCells
 
+compileTestSchelingSimulator:
+	javac -d bin -classpath lib/gui.jar src/TestSchelling.java src/SchellingSimulator.java src/SchellingEvent.java src/EventSimulable.java src/GridSimulable.java src/EventManager.java src/Event.java
+
+runSchellingSmall2Colors: compileTestSchelingSimulator
+	java -classpath bin:lib/gui.jar TestShellingSmall2Colors
+
+runSchellingSmall4Colors: compileTestSchelingSimulator
+	java -classpath bin:lib/gui.jar TestShellingSmall4Colors
+
+runSchellingMedium3Colors: compileTestSchelingSimulator
+	java -classpath bin:lib/gui.jar TestShellingMedium3Colors
+
+runSchellingMedium6Colors: compileTestSchelingSimulator
+	java -classpath bin:lib/gui.jar TestShellingMedium6Colors
+
+runSchellingBig3Colors: compileTestSchelingSimulator
+	java -classpath bin:lib/gui.jar TestShellingBig3Colors
+
+runSchellingBig6Colors: compileTestSchelingSimulator
+	java -classpath bin:lib/gui.jar TestShellingBig6Colors
+
+compileTestBoidsSimulator:
+	javac -d bin -classpath lib/gui.jar src/TestBoidsSimulator.java src/Boid.java src/Boids.java src/BoidCharacteristics.java src/BoidsEvent.java src/BoidsSimulator.java src/DVector.java src/Triangle.java src/EventSimulable.java src/GridSimulable.java src/EventManager.java src/Event.java
+
+runTestBoids: compileTestBoidsSimulator
+	java -classpath bin:lib/gui.jar TestBoidsSimulator
+
 clean:
 	rm -rf bin/
 

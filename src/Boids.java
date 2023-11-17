@@ -53,7 +53,7 @@ public class Boids {
     /**
     Adds boidNumber boids with the same characteristics to our collection of boids
      */
-    public void addBoidGroup(int boidNumber, BoidCaracteristics groupCaracteristics) {
+    public void addBoidGroup(int boidNumber, BoidCharacteristics groupCaracteristics) {
         for (int i = 0; i < boidNumber; i++) {
             boidsList.add(new Boid(groupCaracteristics, windowSize));
         }
@@ -74,7 +74,7 @@ public class Boids {
      */
     private void addStandardRules(Boid boid, Boid other, DVector acceleration) {
         DVector position = boid.getPosition();
-        BoidCaracteristics caracteristics = boid.getCaracteristics();
+        BoidCharacteristics caracteristics = boid.getCaracteristics();
         DVector separationVector = DVector.minus(position, other.getPosition());
         // Only apply Cohesion and Alignment to boids of the same family, i.e. the same characteristics
         if (boid.getCaracteristics() == other.getCaracteristics()) {
@@ -100,7 +100,7 @@ public class Boids {
     // if the velocity is higher that the velocity threshold
     private void addFriction(Boid boid, DVector acceleration) {
         DVector velocity = boid.getVelocity();
-        BoidCaracteristics caracteristics = boid.getCaracteristics();
+        BoidCharacteristics caracteristics = boid.getCaracteristics();
         double velocityMagnitude = velocity.magnitude();
         if (velocityMagnitude > caracteristics.getFrictionVelocityThreshold())
             acceleration.add(DVector.mult(velocity, -caracteristics.getFrictionConstant()));
@@ -111,7 +111,7 @@ public class Boids {
     // can only be found in the 8 neighbouring cells of the boid's cell
     public void computeNewBoidState(int i, int j, Boid boid) {
         DVector acceleration = new DVector(0, 0);
-        BoidCaracteristics caracteristics = boid.getCaracteristics();
+        BoidCharacteristics caracteristics = boid.getCaracteristics();
         double neighbourNumber = 0;
 
         for (int k = Math.max(i - 1, 0); k <= Math.min(i + 1, gridSize - 1); k++) {

@@ -3,7 +3,7 @@ import java.awt.*;
 /*
 Stores all the characteristics of a boid
  */
-public class BoidCaracteristics {
+public class BoidCharacteristics {
     private final Color color;
     private final double mass;
     private final int boidSize;
@@ -18,7 +18,7 @@ public class BoidCaracteristics {
      */
     private final int updateTime;
 
-    public BoidCaracteristics(Color color, double mass, int boidSize, int frictionVelocityThreshold, double cohesionConstant, double alignmentConstant, double separationConstant, double wallRepulsionConstant, double frictionConstant, int updateTime) {
+    public BoidCharacteristics(Color color, double mass, int boidSize, int frictionVelocityThreshold, double cohesionConstant, double alignmentConstant, double separationConstant, double wallRepulsionConstant, double frictionConstant, int updateTime) {
         this.color = color;
         this.mass = mass;
         this.boidSize = boidSize;

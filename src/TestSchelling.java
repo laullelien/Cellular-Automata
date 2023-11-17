@@ -8,14 +8,6 @@ class TestShellingSmall2Colors {
     }
 }
 
-class TestShellingSmall3Colors {
-
-    public static void main(String[] args) {
-        final Color[] colors = {Color.white, Color.blue, Color.red, Color.green};
-        SchellingSimulator test = new SchellingSimulator(400, 4, 3, (char) 3, colors);
-    }
-}
-
 class TestShellingSmall4Colors {
 
     public static void main(String[] args) {
@@ -28,7 +20,7 @@ class TestShellingMedium3Colors {
 
     public static void main(String[] args) {
         final Color[] colors = {Color.white, Color.blue, Color.red, Color.green};
-        SchellingSimulator test = new SchellingSimulator(800, 20, 2, (char) 6, colors);
+        SchellingSimulator test = new SchellingSimulator(800, 20, 2, (char) 3, colors);
     }
 }
 class TestShellingMedium6Colors {

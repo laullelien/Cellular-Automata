@@ -1,6 +1,5 @@
 import gui.GUISimulator;
 import gui.Rectangle;
-import gui.Simulable;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -23,7 +22,7 @@ public class BoidsSimulator extends EventSimulable {
     and draws it
      */
     private void drawBoid(Boid boid) {
-        BoidCaracteristics caracteristics = boid.getCaracteristics();
+        BoidCharacteristics caracteristics = boid.getCaracteristics();
         DVector position = boid.getPosition();
         DVector orientation = boid.getOrientation();
         orientation.mult(caracteristics.getBoidSize());
