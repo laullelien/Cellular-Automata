@@ -39,6 +39,36 @@ compileTestGOLSimulator:
 runStandardCellsGOL: compileTestGOLSimulator
 	java -classpath bin:lib/gui.jar Test1_StandardCells
 
+runStaticCellsGOL: compileTestGOLSimulator
+	java -classpath bin:lib/gui.jar Test2_StaticCells
+
+runTwoStatesCellsGOL: compileTestGOLSimulator
+	java -classpath bin:lib/gui.jar Test3_TwoStatesCells
+
+runCellsCanConvergeQuicklyGOL: compileTestGOLSimulator
+	java -classpath bin:lib/gui.jar Test4_CellsCanConvergeQuickly
+
+runCellsCondemnedToDieGOL: compileTestGOLSimulator
+	java -classpath bin:lib/gui.jar Test5_CellsCondemnedToDie
+
+compileTestImmSimulator:
+	javac -d bin -classpath lib/gui.jar src/TestImmigrationSimulator.java src/ImmigrationSimulator.java src/ImmNextEvent.java src/EventSimulable.java src/GridSimulable.java src/EventManager.java src/Event.java src/Immigration.java
+
+runVerySmallTwoColorsImm: compileTestImmSimulator
+	java -classpath bin:lib/gui.jar VerySmallTwoColors
+
+runSmallTwoColorsImm: compileTestImmSimulator
+	java -classpath bin:lib/gui.jar SmallTwoColors
+
+runSmallFourColours: compileTestImmSimulator
+	java -classpath bin:lib/gui.jar SmallFourColors
+
+runMediumThreeColors: compileTestImmSimulator
+	java -classpath bin:lib/gui.jar MediumThreeColors
+
+runBigThreeColors: compileTestImmSimulator
+	java -classpath bin:lib/gui.jar BigThreeColors
+
 clean:
 	rm -rf bin/
 

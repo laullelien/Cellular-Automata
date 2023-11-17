@@ -36,7 +36,7 @@ class MediumThreeColors {
 class BigThreeColors {
     public static void main(String[] args) {
         Color[] colors = {new Color(10, 10, 100), new Color(100, 0, 200), new Color(255, 255, 255)};
-        Immigration i = new Immigration(10, 3, colors);
+        Immigration i = new Immigration(100, 3, colors);
         new ImmigrationSimulator(1000, i);
     }
 }
