@@ -4,24 +4,24 @@ import java.util.Random;
 
 
 public class SchellingSimulator extends GridSimulable {
-    /*
+    /**
     Families are represented by an id of type char
      */
-    /*
+    /**
     Linkedlist of families that have moved from the grid
     because they had to many neighbours of a different kind
      */
     final LinkedList<Character> homelessFamilies;
-    /*
+    /**
     Linkedlist of cells that aren't occupied by any family
      */
     final LinkedList<Point> availableHomes;
-    /*
+    /**
     Grid that stores in each cell a positive family id
     or 0 if the cell isn't inhabited
      */
     final private char[][] grid;
-    /*
+    /**
     List of colors
     colors[i] is the color that will be used to represent
     the ith family if i is positive or not inhabited homes if i is 0
@@ -57,7 +57,7 @@ public class SchellingSimulator extends GridSimulable {
         }
     }
 
-    /*
+    /**
     Initializes the grid randomly
      */
     public void initialiseGrid() {
@@ -79,7 +79,7 @@ public class SchellingSimulator extends GridSimulable {
         }
     }
 
-    /*
+    /**
     Goes through the entire grid and stores available homes
     i.e. cells that store 0 in the linkedlist availableHomes
      */
@@ -94,7 +94,7 @@ public class SchellingSimulator extends GridSimulable {
         }
     }
 
-    /*
+    /**
     A family is unhappy if there are more than K families of a different kind in the 8 families surrounding it
      */
     public void removeUnhappyFamilies() {

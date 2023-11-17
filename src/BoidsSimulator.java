@@ -18,7 +18,7 @@ public class BoidsSimulator extends EventSimulable {
         super.restart();
     }
 
-    /*
+    /**
     Computes the points needed to draw the triangle representing the boid
     and draws it
      */
@@ -59,7 +59,7 @@ public class BoidsSimulator extends EventSimulable {
         }
     }
 
-    /*
+    /**
     Resets the boid grid with the same boids as before but
     with new random positions and velocities and draws them
      */

@@ -13,7 +13,7 @@ public class BoidCaracteristics {
     private final double separationConstant;
     private final double wallRepulsionConstant;
     private final double frictionConstant;
-    /*
+    /**
     The number of frame taken to update its state
      */
     private final int updateTime;

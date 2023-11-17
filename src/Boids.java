@@ -1,33 +1,33 @@
 import java.awt.*;
 import java.util.ArrayList;
 
-/*
+/**
 Represent a collection of boid,
 which can have different characteristics
  */
 public class Boids {
-    /*
+    /**
     Distance threshold under which boids influence each other
      */
     final private int neighbourInfluenceCircleRadius;
     final private int neighbourInfluenceCircleDiametre;
-    /*
+    /**
     Arraylist storing all our boids.
     They may have different characteristics
      */
     final private ArrayList<Boid> boidsList;
     final private int windowSize;
-    /*
+    /**
     Number of cells in each dimension
      */
     final private int gridSize;
-    /*
+    /**
     Grid used to store boids current state
     and find all boids that influence a certain boid efficiently
     Each cell is a vector of boids
      */
     private ArrayList<Boid>[][] boidGrid;
-    /*
+    /**
     Same as boidGrid with the exception that this grid
     is only used to compute the new boids state using the current grid
      */
@@ -50,7 +50,7 @@ public class Boids {
         }
     }
 
-    /*
+    /**
     Adds boidNumber boids with the same characteristics to our collection of boids
      */
     public void addBoidGroup(int boidNumber, BoidCaracteristics groupCaracteristics) {
@@ -69,7 +69,7 @@ public class Boids {
         newBoidGrid[coordinates.x][coordinates.y].add(new Boid(boid.getCaracteristics(), newPosition, newVelocity));
     }
 
-    /*
+    /**
     Knowing that boid and other influence each other, we
      */
     private void addStandardRules(Boid boid, Boid other, DVector acceleration) {
