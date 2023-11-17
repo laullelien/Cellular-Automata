@@ -23,7 +23,7 @@ class Test3_TwoStatesCells {
         // Additional code specific to Test 3 if needed
     }
 }
-class Test4_CellsCondemnedToConverge {
+class Test4_CellsCanConvergeQuickly {
     public static void main(String[] args) {
         Color[] colors = {new Color(0, 128, 255), new Color(128, 0, 200)};
         GameOfLifeSimulator game = new GameOfLifeSimulator(800, 40, new int[]{0, 1, 2, 3, 4, 5, 6, 7, 8}, new int[]{0, 3, 4, 8}, colors[0], colors[1]);
