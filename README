@@ -1,0 +1,13 @@
+Vous pouvez tester nos class avec les commandes suivantes:
+Balls:
+	make runTestBallsSimulator
+
+Schelling:
+	make runSchellingSmall2Colors
+	make runSchellingSmall4Colors
+	make runSchellingMedium3Colors
+	make runSchellingMedium6Colors
+	make runSchellingBig3Colors
+	make runSchellingBig6Colors
+Boids:
+	make runTestBoids
