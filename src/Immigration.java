@@ -1,7 +1,7 @@
 import java.awt.Color;
 import java.util.LinkedList;
 
-/*
+/**
 * Stores a grid of the immigration game at a given time
 * As well as the coordinates of the cells to be updated in the next frame
 * */
