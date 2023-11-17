@@ -27,11 +27,17 @@ compileTestInvader:
 runTestInvader: compileTestInvader
 	java -classpath bin:lib/gui.jar TestInvader
 
-compileTestBalls:
-	javac -d bin -classpath lib/gui.jar src/TestBalls.java src/Balls.java
+compileTestBallsSimulator:
+	javac -d bin -classpath lib/gui.jar src/BallsSimulator.java src/Balls.java src/BallsEvent.java src/EventSimulable.java src/Vector.java src/EventManager.java src/Event.java
 
-runTestBalls: compileTestBalls 
-	java -classpath bin:lib/gui.jar TestBalls
+runTestBallsSimulator: compileTestBallsSimulator
+	java -classpath bin:lib/gui.jar TestBallsSimulator
+
+compileTestGOLSimulator:
+	javac -d bin -classpath lib/gui.jar src/TestGameOfLifeSimulator.java src/GameOfLifeSimulator.java src/GameOfLifeEvent.java src/EventSimulable.java src/GridSimulable.java src/EventManager.java src/Event.java
+
+runStandardCellsGOL: compileTestGOLSimulator
+	java -classpath bin:lib/gui.jar Test1_StandardCells
 
 clean:
 	rm -rf bin/
