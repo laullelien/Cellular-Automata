@@ -2,6 +2,20 @@ Vous pouvez tester nos class avec les commandes suivantes:
 Balls:
 	make runTestBallsSimulator
 
+GameOfLife:
+    make runStandardCells
+    make runStaticCells
+    make runTwoStatesCells
+    make runCellsCenConvergeQuickly
+    make runCellsCondemnedToDie
+
+Immigration:
+    make runVerySmallTwoColorsImm
+    make runSmallTwoColorsImm
+    make runSmallFourColours
+    make runMediumThreeColors
+    make runBigThreeColors
+
 Schelling:
 	make runSchellingSmall2Colors
 	make runSchellingSmall4Colors
