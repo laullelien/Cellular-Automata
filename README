@@ -12,9 +12,9 @@ GameOfLife:
 Immigration:
     make runVerySmallTwoColorsImm
     make runSmallTwoColorsImm
-    make runSmallFourColours
-    make runMediumThreeColors
-    make runBigThreeColors
+    make runSmallFourColoursImm
+    make runMediumThreeColorsImm
+    make runBigThreeColorsImm
 
 Schelling:
 	make runSchellingSmall2Colors

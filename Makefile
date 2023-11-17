@@ -60,13 +60,13 @@ runVerySmallTwoColorsImm: compileTestImmSimulator
 runSmallTwoColorsImm: compileTestImmSimulator
 	java -classpath bin:lib/gui.jar SmallTwoColors
 
-runSmallFourColours: compileTestImmSimulator
+runSmallFourColoursImm: compileTestImmSimulator
 	java -classpath bin:lib/gui.jar SmallFourColors
 
-runMediumThreeColors: compileTestImmSimulator
+runMediumThreeColorsImm: compileTestImmSimulator
 	java -classpath bin:lib/gui.jar MediumThreeColors
 
-runBigThreeColors: compileTestImmSimulator
+runBigThreeColorsImm: compileTestImmSimulator
 	java -classpath bin:lib/gui.jar BigThreeColors
 
 compileTestSchelingSimulator:
